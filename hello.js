@@ -1,3 +1,1 @@
-console.log("hey there i am Rohit !")
-
-console.log(window)
+console.log('Hello ji my name is Rohit !!')
