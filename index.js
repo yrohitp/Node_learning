@@ -1,15 +1,22 @@
-const http = require("http");
+const express = require("express");
+const users = require("./MOCK_DATA.json")
+const app = express() ; 
+const PORT = 8000;
 
-const fs = require("fs");
 
-const myserver = http.createServer((req,res)=>{
-    const log = `${Date.now()}; New Req Recieved\n`;
-    fs.appendFile("log.txt",log,(err,data) => {
-        res.end('Hello fronm server Again')
-    }); 
+// ROUTES
+app.get("/api/users" , (req,res) => {
+    return res.json(users);
+})
 
-    console.log("server request is comming");
-    res.end("hello from server");
-});
+app.get("/api/users/:id" , (req , res) => {
+    const id = Number(req.params.id);
+    const user = users.find((user) => user.id === id)
+    return res.json(user);
+})
 
-myserver.listen(8000,() => console.log("server is running on 8000"));
+
+
+
+
+app.listen(PORT , () => console.log(`Server is Running at Port ${PORT}`))
